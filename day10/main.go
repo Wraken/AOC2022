@@ -55,12 +55,9 @@ func (c *cpu) drawPixel() {
 	vert := c.nbCycles / 40
 	hor := c.nbCycles % 40
 
-	fmt.Println(spritPos, vert, hor, c.x, c.nbCycles)
-
 	if hor >= spritPos-1 && hor <= spritPos+1 {
 		c.screen[vert][hor] = '#'
 	}
-	c.drawScreen()
 }
 
 func (c *cpu) drawScreen() {
