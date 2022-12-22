@@ -51,7 +51,7 @@ func solveEq(m *monkey, mksMap map[string]*monkey) int64 {
 	return m.number
 }
 
-func solveEqX(m *monkey, nbToMatch, currNb int64, mksMap map[string]*monkey) int64 {
+func solveEqX(m *monkey, currNb int64, mksMap map[string]*monkey) int64 {
 	if m.name == "humn" {
 		return currNb
 	}
@@ -69,7 +69,7 @@ func solveEqX(m *monkey, nbToMatch, currNb int64, mksMap map[string]*monkey) int
 			currNb = currNb * nb
 		}
 		//fmt.Println(currNb)
-		currNb = solveEqX(mksMap[m.relation[1]], nbToMatch, currNb, mksMap)
+		currNb = solveEqX(mksMap[m.relation[1]], currNb, mksMap)
 	} else if !strings.Contains(findEq(mksMap[m.relation[1]], mksMap), "x") {
 		nb := solveEq(mksMap[m.relation[1]], mksMap)
 		switch m.op {
@@ -82,7 +82,7 @@ func solveEqX(m *monkey, nbToMatch, currNb int64, mksMap map[string]*monkey) int
 		case "/":
 			currNb = currNb * nb
 		}
-		currNb = solveEqX(mksMap[m.relation[0]], nbToMatch, currNb, mksMap)
+		currNb = solveEqX(mksMap[m.relation[0]], currNb, mksMap)
 	}
 
 	return currNb
@@ -97,11 +97,11 @@ func makeMonkeyYellButIYellToo(mks []*monkey, mksMap map[string]*monkey) int64 {
 	if !strings.Contains(eq1, "x") {
 		nbToMatch = solveEq(mksMap[root.relation[0]], mksMap)
 		fmt.Println("nb to match", nbToMatch)
-		eqRes = solveEqX(mksMap[root.relation[1]], nbToMatch, nbToMatch, mksMap)
+		eqRes = solveEqX(mksMap[root.relation[1]], nbToMatch, mksMap)
 	} else if !strings.Contains(eq2, "x") {
 		nbToMatch = solveEq(mksMap[root.relation[1]], mksMap)
 		fmt.Println("nb to match", nbToMatch)
-		eqRes = solveEqX(mksMap[root.relation[0]], nbToMatch, nbToMatch, mksMap)
+		eqRes = solveEqX(mksMap[root.relation[0]], nbToMatch, mksMap)
 	}
 
 	return eqRes
