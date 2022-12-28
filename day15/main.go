@@ -7,6 +7,7 @@ import (
 	"math"
 	"os"
 	"sort"
+	"time"
 )
 
 type sensor struct {
@@ -125,6 +126,9 @@ func main() {
 	}
 
 	fmt.Println("Part 1:", checkBeaconY(minX, maxX, 2000000, sensors))
-
-	fmt.Println("Part2 :", findDistressBeacon(0, 4000000, sensors))
+	t := time.Now()
+	nb := findDistressBeacon(0, 4000000, sensors)
+	elapsed := time.Since(t)
+	fmt.Println(elapsed)
+	fmt.Println(nb)
 }

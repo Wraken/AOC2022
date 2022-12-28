@@ -158,7 +158,7 @@ func main() {
 
 	maps := [700][700]rune{}
 	for y, l := range maps {
-		for x, _ := range l {
+		for x := range l {
 			maps[y][x] = '.'
 		}
 	}
